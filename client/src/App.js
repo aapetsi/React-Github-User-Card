@@ -11,6 +11,10 @@ class App extends Component {
     followers: []
   };
 
+  updateUserSearch = username => {
+    this.setState({ account: username });
+  };
+
   fetchUserAndFollowers = () => {
     const api = `https://api.github.com/users/${this.state.account}`;
     axios
@@ -26,7 +30,7 @@ class App extends Component {
           });
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.response);
       });
   };
 
@@ -39,16 +43,10 @@ class App extends Component {
   }
 
   render() {
-    // const renderedData =
-    //   this.state.data.length === 0 ? (
-    //     <p>Loading</p>
-    //   ) : (
-    //     <CardList data={this.state.data} />
-    //   );
     return (
       <div className="App">
         <h1>Welcome to my app</h1>
-        <Search />
+        <Search updateUserSearch={this.updateUserSearch} />
         <CardList followers={this.state.followers} user={this.state.user} />
       </div>
     );

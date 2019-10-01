@@ -8,10 +8,15 @@ class Search extends Component {
   handleChange = e => {
     this.setState({ username: e.target.value });
   };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.updateUserSearch(this.state.username);
+  };
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
             name="username"
             value={this.state.username}
